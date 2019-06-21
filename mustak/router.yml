@@ -1,0 +1,60 @@
+spring :
+ application :
+  name : Apigateway
+security:
+  require-ssl: true
+server:
+  port: 8080
+  tomcat:
+   accesslog:
+    enabled: true
+    directory: /mnt/appln/webadmin/
+    pattern: combined
+    rotate: false
+    accept-count: 500
+    max-threads: 1000
+    min-spare-threads: 48
+  connection-timeout: 100000
+zuul:
+  host: 
+    connectTimeoutMillis: 100000
+    socketTimeoutMillis: 100000
+  routes:
+    Quote:
+      path: /quote/**
+      url: https://nsewebapi.nseroot.com/quote
+    Pricewatch:
+      path: /pricewatch/**
+      url: https://nsewebapi.nseroot.com/pricewatch
+    Liveanalysis:
+      path: /liveanalysis/**
+      url: https://nsewebapi.nseroot.com/liveanalysis
+    Preopen:
+      path: /preopen/**
+      url: https://nsewebapi.nseroot.com/preopen
+    Corporate:
+      path: /corporates/**
+      url:  https://nsewebapi.nseroot.com/corporates
+    Graph:
+      path: /charts/**
+      url: https://nsewebapi.nseroot.com/charts
+    DailyReports:
+      path: /dailyreports/**
+      url:  http://172.17.7.185:20006/dailyreports
+    Others:
+      path: /others/**
+      url:  https://nsewebapi.nseroot.com/others
+    Master:
+      path: /master/**
+      url: https://nsewebapi.nseroot.com/master
+    OptionChain:
+      path: /optionchain/**
+      url: https://nsewebapi.nseroot.com/optionchain
+    Miscellaneous:
+      path: /miscellaneous/**
+      url: https://nsewebapi.nseroot.com/miscellaneous
+    
+management:
+endpoint:
+    routes:
+    enabled: true
